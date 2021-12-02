@@ -9,14 +9,14 @@ import 'package:rusher/components/horse.dart';
 import '/models/settings.dart';
 import '/models/player_data.dart';
 import 'game_over_menu.dart';
-import 'hud.dart';
+import 'infobar.dart';
 import 'pause_menu.dart';
 
 
 class Rusher extends BaseGame with TapDetector, HasCollidables {
   
   static const _imageAssets = [
-    'running_horse_right.png',
+    'horse.png',
     'hills-scroll.png',
     'scroll_bg_far.png',
   ];
@@ -42,7 +42,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
       velocityMultiplierDelta: Vector2(1.4, 0),
     );
     add(parallaxBackground);
-    _Horse = Horse(images.fromCache('running_horse_right.png'), playerData);
+    _Horse = Horse(images.fromCache('horse.png'), playerData);
     return super.onLoad();
   }
 
@@ -64,7 +64,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
   void update(double dt) {
     if (playerData.lives <= 0) {
       this.overlays.add(GameOverMenu.id);
-      this.overlays.remove(Hud.id);
+      this.overlays.remove(InfoBar.id);
       this.pauseEngine();
     }
     super.update(dt);
@@ -72,7 +72,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
   
   @override
   void onTapDown(TapDownInfo info) {
-    if (this.overlays.isActive(Hud.id)) {
+    if (this.overlays.isActive(InfoBar.id)) {
       _Horse.jump();
     }
     super.onTapDown(info);
@@ -114,8 +114,8 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
       case AppLifecycleState.inactive:    
-        if (this.overlays.isActive(Hud.id)) {
-          this.overlays.remove(Hud.id);
+        if (this.overlays.isActive(InfoBar.id)) {
+          this.overlays.remove(InfoBar.id);
           this.overlays.add(PauseMenu.id);
         }
         this.pauseEngine();

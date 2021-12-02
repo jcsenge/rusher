@@ -5,12 +5,12 @@ import 'package:rusher/components/rusher.dart';
 import '/models/player_data.dart';
 import 'pause_menu.dart';
 
-class Hud extends StatelessWidget {
-  static const id = 'Hud';
+class InfoBar extends StatelessWidget {
+  static const id = 'InfoBar';
 
   final Rusher gameRef;
 
-  const Hud(this.gameRef, {Key? key}) : super(key: key);
+  const InfoBar(this.gameRef, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class Hud extends StatelessWidget {
                   builder: (_, score, __) {
                     return Text(
                       'Score: $score',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(fontSize: 30, color: Colors.white),
                     );
                   },
                 ),
@@ -46,7 +46,7 @@ class Hud extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                gameRef.overlays.remove(Hud.id);
+                gameRef.overlays.remove(InfoBar.id);
                 gameRef.overlays.add(PauseMenu.id);
                 gameRef.pauseEngine();
               },

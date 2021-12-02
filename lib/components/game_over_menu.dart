@@ -4,18 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rusher/models/player_data.dart';
 
-import 'hud.dart';
+import 'infobar.dart';
 import 'main_menu.dart';
 import 'rusher.dart';
 
-
-// This represents the game over overlay,
-// displayed with dino runs out of lives.
 class GameOverMenu extends StatelessWidget {
-  // An unique identified for this overlay.
   static const id = 'GameOverMenu';
-
-  // Reference to parent game.
   final Rusher gameRef;
 
   const GameOverMenu(this.gameRef, {Key? key}) : super(key: key);
@@ -61,7 +55,7 @@ class GameOverMenu extends StatelessWidget {
                       ),
                       onPressed: () {
                         gameRef.overlays.remove(GameOverMenu.id);
-                        gameRef.overlays.add(Hud.id);
+                        gameRef.overlays.add(InfoBar.id);
                         gameRef.resumeEngine();
                         gameRef.reset();
                         gameRef.startGamePlay();

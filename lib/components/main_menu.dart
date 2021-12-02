@@ -2,17 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:rusher/components/rusher.dart';
-
-import 'hud.dart';
+import 'infobar.dart';
 import 'settings_menu.dart';
 
-
-// This represents the main menu overlay.
 class MainMenu extends StatelessWidget {
-  // An unique identified for this overlay.
   static const id = 'MainMenu';
-
-  // Reference to parent game.
   final Rusher gameRef;
 
   const MainMenu(this.gameRef, {Key? key}) : super(key: key);
@@ -21,11 +15,11 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+        filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          color: Colors.black.withAlpha(100),
+          color: Colors.white10,
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: Padding(
@@ -35,7 +29,7 @@ class MainMenu extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Dino Run',
+                    'Rusher',
                     style: TextStyle(
                       fontSize: 50,
                       color: Colors.white,
@@ -45,7 +39,7 @@ class MainMenu extends StatelessWidget {
                     onPressed: () {
                       gameRef.startGamePlay();
                       gameRef.overlays.remove(MainMenu.id);
-                      gameRef.overlays.add(Hud.id);
+                      gameRef.overlays.add(InfoBar.id);
                     },
                     child: Text(
                       'Play',

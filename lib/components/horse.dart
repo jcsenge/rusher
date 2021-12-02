@@ -14,15 +14,16 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
     with Hitbox, Collidable, HasGameRef<Rusher> {
   static final _animationMap = {
     HorseAnimationStates.Jump: SpriteAnimationData.sequenced(
-      amount: 4,
-      stepTime: 0.1,
+      amount: 6,
+      stepTime: 0.2,
       textureSize: Vector2(195,144),
+      texturePosition: Vector2(195*4.0, 0),
     ),
     HorseAnimationStates.Run: SpriteAnimationData.sequenced(
       amount: 6,
-      stepTime: 0.1,
-      textureSize: Vector2(195,144),
-      texturePosition: Vector2(192, 0),
+      stepTime: 0.16,
+      textureSize: Vector2(195,140),
+      texturePosition: Vector2(195*10.0, 0),
     ),
     HorseAnimationStates.Hit: SpriteAnimationData.sequenced(
       amount: 3,

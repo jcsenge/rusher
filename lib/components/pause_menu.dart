@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/models/player_data.dart';
-import 'hud.dart';
+import 'infobar.dart';
 import 'main_menu.dart';
 import 'rusher.dart';
 
@@ -51,7 +51,7 @@ class PauseMenu extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         gameRef.overlays.remove(PauseMenu.id);
-                        gameRef.overlays.add(Hud.id);
+                        gameRef.overlays.add(InfoBar.id);
                         gameRef.resumeEngine();
                       
                       },
@@ -65,7 +65,7 @@ class PauseMenu extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         gameRef.overlays.remove(PauseMenu.id);
-                        gameRef.overlays.add(Hud.id);
+                        gameRef.overlays.add(InfoBar.id);
                         gameRef.resumeEngine();
                         gameRef.reset();
                         gameRef.startGamePlay();

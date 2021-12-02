@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'components/game_over_menu.dart';
-import 'components/hud.dart';
+import 'components/infobar.dart';
 import 'components/main_menu.dart';
 import 'components/pause_menu.dart';
 import 'components/rusher.dart';
@@ -64,7 +64,7 @@ class RusherApp extends StatelessWidget {
           overlayBuilderMap: {
             MainMenu.id: (_, Rusher gameRef) => MainMenu(gameRef),
             PauseMenu.id: (_, Rusher gameRef) => PauseMenu(gameRef),
-            Hud.id: (_, Rusher gameRef) => Hud(gameRef),
+            InfoBar.id: (_, Rusher gameRef) => InfoBar(gameRef),
             GameOverMenu.id: (_, Rusher gameRef) => GameOverMenu(gameRef),
             SettingsMenu.id: (_, Rusher gameRef) => SettingsMenu(gameRef),
           },
