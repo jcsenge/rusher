@@ -10,26 +10,29 @@ enum HorseAnimationStates {
   Hit,
 }
 
+final horseSizeX =  192.0;
+final horseSizeY = 145.0;
+
 class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
     with Hitbox, Collidable, HasGameRef<Rusher> {
   static final _animationMap = {
     HorseAnimationStates.Jump: SpriteAnimationData.sequenced(
       amount: 6,
-      stepTime: 0.2,
-      textureSize: Vector2(195,144),
-      texturePosition: Vector2(195*4.0, 0),
+      stepTime: 0.19,
+      textureSize: Vector2(horseSizeX,horseSizeY),
+      texturePosition: Vector2(horseSizeX*8.0, 0),
     ),
     HorseAnimationStates.Run: SpriteAnimationData.sequenced(
-      amount: 6,
-      stepTime: 0.16,
-      textureSize: Vector2(195,140),
-      texturePosition: Vector2(195*10.0, 0),
+      amount: 7,
+      stepTime: 0.15,
+      textureSize: Vector2(horseSizeX,horseSizeY),
+      texturePosition: Vector2(0, 0),
     ),
     HorseAnimationStates.Hit: SpriteAnimationData.sequenced(
       amount: 3,
       stepTime: 0.1,
-      textureSize: Vector2.all(296),
-      texturePosition: Vector2(276, 0),
+      textureSize: Vector2(horseSizeX,horseSizeY),
+      texturePosition: Vector2(horseSizeX*7.0, 0),
     ),
   };
 
@@ -39,7 +42,7 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
   static const double GRAVITY = 800;
   final PlayerData playerData;
   bool isHit = false;
-
+  
   Horse(Image image, this.playerData)
       : super.fromFrameData(image, _animationMap);
 
@@ -47,7 +50,7 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
   void onMount() {
     this._reset();
 
-    final shape = HitboxRectangle(relation: Vector2(0.5, 0.7));
+    final shape = HitboxRectangle(relation: Vector2(0.2, 0.3));
     addShape(shape);
     yMax = this.y;
 
@@ -95,7 +98,7 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
 
   void jump() {
     if (isOnGround) {
-      this.speedY = -400;
+      this.speedY = -470;
       this.current = HorseAnimationStates.Jump;
     }
   }

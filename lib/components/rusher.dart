@@ -10,6 +10,7 @@ import '/models/settings.dart';
 import '/models/player_data.dart';
 import 'game_over_menu.dart';
 import 'infobar.dart';
+import 'obstacle_manager.dart';
 import 'pause_menu.dart';
 
 
@@ -19,11 +20,15 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     'horse.png',
     'hills-scroll.png',
     'scroll_bg_far.png',
+    'tree.png',
+    'plswork.png',
+    'horse.png'
   ];
 
   late Horse _Horse;
   late Settings settings;
   late PlayerData playerData;
+  late ObstacleManager _obstacleManager;
   
   @override
   Future<void> onLoad() async {
@@ -31,7 +36,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     playerData = await _readPlayerData();
     settings = await _readSettings();
     await images.loadAll(_imageAssets);
-    this.viewport = FixedResolutionViewport(Vector2(360*1.5, 180*1.5));
+    this.viewport = FixedResolutionViewport(Vector2(360*1.5, 180*1.7));
 
     final parallaxBackground = await loadParallaxComponent(
       [
@@ -42,16 +47,20 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
       velocityMultiplierDelta: Vector2(1.4, 0),
     );
     add(parallaxBackground);
+    _obstacleManager = ObstacleManager();
     _Horse = Horse(images.fromCache('horse.png'), playerData);
     return super.onLoad();
   }
 
   void startGamePlay() {
     add(_Horse);
+    add(_obstacleManager);
   }
 
   void _disconnectActors() {
     _Horse.remove(); 
+    _obstacleManager.removeAllEnemies();
+    _obstacleManager.remove();
   }
 
   void reset() {
@@ -73,6 +82,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
   @override
   void onTapDown(TapDownInfo info) {
     if (this.overlays.isActive(InfoBar.id)) {
+      
       _Horse.jump();
     }
     super.onTapDown(info);
