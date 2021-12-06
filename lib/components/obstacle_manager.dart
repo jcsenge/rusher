@@ -31,7 +31,7 @@ class ObstacleManager extends BaseComponent with HasGameRef<Rusher> {
       obstacle.position.y -= newHeight;
     }
 
-    obstacle.size = obstacleData.textureSize/2.35;
+    obstacle.size = obstacleData.textureSize/2.35/1.5+obstacleData.textureSize/2.35/2*_random.nextDouble();
     gameRef.add(obstacle);
   }
 
@@ -44,19 +44,18 @@ class ObstacleManager extends BaseComponent with HasGameRef<Rusher> {
           image: gameRef.images.fromCache('tree.png'),
           nFrames: 1,
           stepTime: 1,
-          //207x382
           textureSize: Vector2(207, 382),
           speedX: 120,
           canFly: false,
         ),
-        // ObstacleData(
-        //   image: gameRef.images.fromCache('Bat/Flying (46x30).png'),
-        //   nFrames: 7,
-        //   stepTime: 0.1,
-        //   textureSize: Vector2(46, 30),
-        //   speedX: 100,
-        //   canFly: true,
-        // ),
+        ObstacleData(
+          image: gameRef.images.fromCache('tree.png'),
+          nFrames: 1,
+          stepTime: 1,
+          textureSize: Vector2(207, 382),
+          speedX: 130,
+          canFly: false,
+        ),
         // ObstacleData(
         //   image: gameRef.images.fromCache('Rino/Run (52x34).png'),
         //   nFrames: 6,

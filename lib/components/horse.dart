@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flame/geometry.dart';
 import 'package:flame/components.dart';
+import 'package:rusher/components/obstacle.dart';
 import 'package:rusher/components/rusher.dart';
 import '/models/player_data.dart';
 
@@ -29,7 +30,7 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
       texturePosition: Vector2(0, 0),
     ),
     HorseAnimationStates.Hit: SpriteAnimationData.sequenced(
-      amount: 3,
+      amount: 1,
       stepTime: 0.1,
       textureSize: Vector2(horseSizeX,horseSizeY),
       texturePosition: Vector2(horseSizeX*7.0, 0),
@@ -88,9 +89,9 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
   void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
     // Call hit only if other component is an Enemy and Horse
     // is not already in hit state.
-    // if ((other is Enemy) && (!isHit)) {
-    //   this.hit();
-    // }
+    if ((other is Obstacle) && (!isHit)) {
+      this.hit();
+    }
     super.onCollision(intersectionPoints, other);
   }
 

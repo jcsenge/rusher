@@ -1,7 +1,5 @@
 import 'package:flame/extensions.dart';
 
-// This class stores all the data 
-// necessary for creation of an enemy.
 class ObstacleData {
   final Image image;
   final int nFrames;

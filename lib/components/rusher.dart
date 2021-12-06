@@ -36,7 +36,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     playerData = await _readPlayerData();
     settings = await _readSettings();
     await images.loadAll(_imageAssets);
-    this.viewport = FixedResolutionViewport(Vector2(360*1.5, 180*1.7));
+    this.viewport = FixedResolutionViewport(Vector2(this.viewport.effectiveSize.x, this.viewport.effectiveSize.y));
 
     final parallaxBackground = await loadParallaxComponent(
       [
