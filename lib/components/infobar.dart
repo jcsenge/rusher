@@ -56,16 +56,22 @@ class InfoBar extends StatelessWidget {
               selector: (_, playerData) => playerData.lives,
               builder: (_, lives, __) {
                 return Row(
-                  children: List.generate(5, (index) {
+                  children: List.generate(3, (index) {
                     if (index < lives) {
-                      return Icon(
-                        Icons.favorite,
-                        color: Colors.red,
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Image.asset(
+                          'assets/images/flower-open.png',
+                          height: 50,
+                        ),
                       );
                     } else {
-                      return Icon(
-                        Icons.favorite_border,
-                        color: Colors.red,
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Image.asset(
+                          'assets/images/flower.png',
+                          height: 50,
+                        ),
                       );
                     }
                   }),

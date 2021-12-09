@@ -13,30 +13,30 @@ import 'infobar.dart';
 import 'obstacle_manager.dart';
 import 'pause_menu.dart';
 
-
 class Rusher extends BaseGame with TapDetector, HasCollidables {
-  
   static const _imageAssets = [
     'horse.png',
     'hills-scroll.png',
     'scroll_bg_far.png',
     'tree.png',
     'plswork.png',
-    'horse.png'
+    'horse.png',
+    'flower-open.png',
+    'flower.png',
   ];
 
   late Horse _Horse;
   late Settings settings;
   late PlayerData playerData;
   late ObstacleManager _obstacleManager;
-  
+
   @override
   Future<void> onLoad() async {
-
     playerData = await _readPlayerData();
     settings = await _readSettings();
     await images.loadAll(_imageAssets);
-    this.viewport = FixedResolutionViewport(Vector2(this.viewport.effectiveSize.x, this.viewport.effectiveSize.y));
+    this.viewport = FixedResolutionViewport(
+        Vector2(this.viewport.effectiveSize.x, this.viewport.effectiveSize.y));
 
     final parallaxBackground = await loadParallaxComponent(
       [
@@ -58,7 +58,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
   }
 
   void _disconnectActors() {
-    _Horse.remove(); 
+    _Horse.remove();
     _obstacleManager.removeAllEnemies();
     _obstacleManager.remove();
   }
@@ -66,7 +66,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
   void reset() {
     _disconnectActors();
     playerData.currentScore = 0;
-    playerData.lives = 5;
+    playerData.lives = 3;
   }
 
   @override
@@ -78,28 +78,25 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     }
     super.update(dt);
   }
-  
+
   @override
   void onTapDown(TapDownInfo info) {
     if (this.overlays.isActive(InfoBar.id)) {
-      
       _Horse.jump();
     }
     super.onTapDown(info);
   }
 
-  
   Future<PlayerData> _readPlayerData() async {
     final playerDataBox =
         await Hive.openBox<PlayerData>('Rusher.PlayerDataBox');
     final playerData = playerDataBox.get('Rusher.PlayerData');
-    if (playerData == null) { 
+    if (playerData == null) {
       await playerDataBox.put('Rusher.PlayerData', PlayerData());
-    }    
+    }
     return playerDataBox.get('Rusher.PlayerData')!;
   }
 
-  
   Future<Settings> _readSettings() async {
     final settingsBox = await Hive.openBox<Settings>('Rusher.SettingsBox');
     final settings = settingsBox.get('Rusher.Settings');
@@ -123,7 +120,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
         break;
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
-      case AppLifecycleState.inactive:    
+      case AppLifecycleState.inactive:
         if (this.overlays.isActive(InfoBar.id)) {
           this.overlays.remove(InfoBar.id);
           this.overlays.add(PauseMenu.id);
