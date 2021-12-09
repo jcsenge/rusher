@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rusher/components/menu_wrapper.dart';
+import 'package:rusher/components/menus/menu_wrapper.dart';
 import 'package:rusher/models/player_data.dart';
 
-import 'infobar.dart';
+import '../gameplay/infobar.dart';
 import 'main_menu.dart';
-import 'rusher.dart';
+import '../gameplay/rusher.dart';
 
 class GameOverMenu extends StatelessWidget {
   static const id = 'GameOverMenu';

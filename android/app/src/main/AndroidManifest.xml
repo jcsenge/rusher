@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rusher">
+    package="hu.bme.aut.rusher">
    <application
         android:label="rusher"
         android:name="${applicationName}"

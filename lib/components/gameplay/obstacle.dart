@@ -1,6 +1,6 @@
 import 'package:flame/geometry.dart';
 import 'package:flame/components.dart';
-import 'package:rusher/components/rusher.dart';
+import 'package:rusher/components/gameplay/rusher.dart';
 import 'package:rusher/models/obstacle_data.dart';
 
 class Obstacle extends SpriteAnimationComponent

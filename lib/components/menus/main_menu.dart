@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rusher/components/menu_wrapper.dart';
-import 'package:rusher/components/rusher.dart';
-import 'package:rusher/components/settings_menu.dart';
+import 'package:rusher/components/menus/menu_wrapper.dart';
+import 'package:rusher/components/gameplay/rusher.dart';
+import 'package:rusher/components/menus/settings_menu.dart';
 
-import 'infobar.dart';
+import '../gameplay/infobar.dart';
 
 class MainMenu extends StatelessWidget {
   static const id = 'MainMenu';

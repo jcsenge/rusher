@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flame/geometry.dart';
 import 'package:flame/components.dart';
-import 'package:rusher/components/obstacle.dart';
-import 'package:rusher/components/rusher.dart';
+import 'package:rusher/components/gameplay/obstacle.dart';
+import 'package:rusher/components/gameplay/rusher.dart';
 import '/models/player_data.dart';
 
 enum HorseAnimationStates {

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:rusher/components/rusher.dart';
+import 'package:rusher/components/gameplay/rusher.dart';
 import 'package:rusher/models/obstacle_data.dart';
 
 import 'obstacle.dart';

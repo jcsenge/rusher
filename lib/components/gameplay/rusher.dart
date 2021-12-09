@@ -4,14 +4,14 @@ import 'package:flame/gestures.dart';
 import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
-import 'package:rusher/components/horse.dart';
+import 'package:rusher/components/gameplay/horse.dart';
 
 import '/models/settings.dart';
 import '/models/player_data.dart';
-import 'game_over_menu.dart';
+import '../menus/game_over_menu.dart';
 import 'infobar.dart';
 import 'obstacle_manager.dart';
-import 'pause_menu.dart';
+import '../menus/pause_menu.dart';
 
 class Rusher extends BaseGame with TapDetector, HasCollidables {
   static const _imageAssets = [

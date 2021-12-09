@@ -4,13 +4,14 @@ import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:rusher/components/login/login.dart';
 
-import 'components/game_over_menu.dart';
-import 'components/infobar.dart';
-import 'components/main_menu.dart';
-import 'components/pause_menu.dart';
-import 'components/rusher.dart';
-import 'components/settings_menu.dart';
+import 'components/menus/game_over_menu.dart';
+import 'components/gameplay/infobar.dart';
+import 'components/menus/main_menu.dart';
+import 'components/menus/pause_menu.dart';
+import 'components/gameplay/rusher.dart';
+import 'components/menus/settings_menu.dart';
 import 'models/player_data.dart';
 import 'models/settings.dart';
 
@@ -37,6 +38,7 @@ Future<void> initHive() async {
 class RusherApp extends StatelessWidget {
   const RusherApp({Key? key}) : super(key: key);
   final RusherGame rusherGame = const RusherGame();
+  final Login login = const Login();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class RusherApp extends StatelessWidget {
           ),
         ),
       ),
-      home: rusherGame,
+      home: login,
     );
   }
 }
