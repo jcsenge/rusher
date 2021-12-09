@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:rusher/components/menu_wrapper.dart';
 import 'package:rusher/components/rusher.dart';
 import 'package:rusher/components/settings_menu.dart';
@@ -24,7 +23,7 @@ class MainMenu extends StatelessWidget {
               gameRef.overlays.remove(MainMenu.id);
               gameRef.overlays.add(InfoBar.id);
             },
-            child: Text(
+            child: const Text(
               'Play',
               style: TextStyle(
                 fontSize: 30,
@@ -36,7 +35,7 @@ class MainMenu extends StatelessWidget {
               gameRef.overlays.remove(MainMenu.id);
               gameRef.overlays.add(SettingsMenu.id);
             },
-            child: Text(
+            child: const Text(
               'Settings',
               style: TextStyle(
                 fontSize: 30,

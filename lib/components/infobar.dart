@@ -29,7 +29,7 @@ class InfoBar extends StatelessWidget {
                   builder: (_, score, __) {
                     return Text(
                       'Score: $score',
-                      style: TextStyle(fontSize: 30, color: Colors.white),
+                      style: const TextStyle(fontSize: 30, color: Colors.white),
                     );
                   },
                 ),
@@ -38,7 +38,7 @@ class InfoBar extends StatelessWidget {
                   builder: (_, highScore, __) {
                     return Text(
                       'High: $highScore',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     );
                   },
                 ),
@@ -50,7 +50,7 @@ class InfoBar extends StatelessWidget {
                 gameRef.overlays.add(PauseMenu.id);
                 gameRef.pauseEngine();
               },
-              child: Icon(Icons.pause, color: Colors.white),
+              child: const Icon(Icons.pause, color: Colors.white),
             ),
             Selector<PlayerData, int>(
               selector: (_, playerData) => playerData.lives,

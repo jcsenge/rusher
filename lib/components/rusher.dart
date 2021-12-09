@@ -25,7 +25,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     'flower.png',
   ];
 
-  late Horse _Horse;
+  late Horse _horse;
   late Settings settings;
   late PlayerData playerData;
   late ObstacleManager _obstacleManager;
@@ -35,8 +35,8 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     playerData = await _readPlayerData();
     settings = await _readSettings();
     await images.loadAll(_imageAssets);
-    this.viewport = FixedResolutionViewport(
-        Vector2(this.viewport.effectiveSize.x, this.viewport.effectiveSize.y));
+    viewport = FixedResolutionViewport(
+        Vector2(viewport.effectiveSize.x, viewport.effectiveSize.y));
 
     final parallaxBackground = await loadParallaxComponent(
       [
@@ -48,17 +48,17 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     );
     add(parallaxBackground);
     _obstacleManager = ObstacleManager();
-    _Horse = Horse(images.fromCache('horse.png'), playerData);
+    _horse = Horse(images.fromCache('horse.png'), playerData);
     return super.onLoad();
   }
 
   void startGamePlay() {
-    add(_Horse);
+    add(_horse);
     add(_obstacleManager);
   }
 
   void _disconnectActors() {
-    _Horse.remove();
+    _horse.remove();
     _obstacleManager.removeAllEnemies();
     _obstacleManager.remove();
   }
@@ -72,17 +72,17 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
   @override
   void update(double dt) {
     if (playerData.lives <= 0) {
-      this.overlays.add(GameOverMenu.id);
-      this.overlays.remove(InfoBar.id);
-      this.pauseEngine();
+      overlays.add(GameOverMenu.id);
+      overlays.remove(InfoBar.id);
+      pauseEngine();
     }
     super.update(dt);
   }
 
   @override
   void onTapDown(TapDownInfo info) {
-    if (this.overlays.isActive(InfoBar.id)) {
-      _Horse.jump();
+    if (overlays.isActive(InfoBar.id)) {
+      _horse.jump();
     }
     super.onTapDown(info);
   }
@@ -113,19 +113,19 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
   void lifecycleStateChange(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed:
-        if (!(this.overlays.isActive(PauseMenu.id)) &&
-            !(this.overlays.isActive(GameOverMenu.id))) {
-          this.resumeEngine();
+        if (!(overlays.isActive(PauseMenu.id)) &&
+            !(overlays.isActive(GameOverMenu.id))) {
+          resumeEngine();
         }
         break;
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
       case AppLifecycleState.inactive:
-        if (this.overlays.isActive(InfoBar.id)) {
-          this.overlays.remove(InfoBar.id);
-          this.overlays.add(PauseMenu.id);
+        if (overlays.isActive(InfoBar.id)) {
+          overlays.remove(InfoBar.id);
+          overlays.add(PauseMenu.id);
         }
-        this.pauseEngine();
+        pauseEngine();
         break;
     }
     super.lifecycleStateChange(state);

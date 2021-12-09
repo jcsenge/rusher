@@ -6,58 +6,58 @@ import 'package:rusher/components/rusher.dart';
 import '/models/player_data.dart';
 
 enum HorseAnimationStates {
-  Jump,
-  Run,
-  Hit,
+  jump,
+  run,
+  hit,
 }
 
-final horseSizeX =  192.0;
-final horseSizeY = 145.0;
+const horseSizeX = 192.0;
+const horseSizeY = 145.0;
 
 class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
     with Hitbox, Collidable, HasGameRef<Rusher> {
   static final _animationMap = {
-    HorseAnimationStates.Jump: SpriteAnimationData.sequenced(
+    HorseAnimationStates.jump: SpriteAnimationData.sequenced(
       amount: 6,
       stepTime: 0.19,
-      textureSize: Vector2(horseSizeX,horseSizeY),
-      texturePosition: Vector2(horseSizeX*8.0, 0),
+      textureSize: Vector2(horseSizeX, horseSizeY),
+      texturePosition: Vector2(horseSizeX * 8.0, 0),
     ),
-    HorseAnimationStates.Run: SpriteAnimationData.sequenced(
+    HorseAnimationStates.run: SpriteAnimationData.sequenced(
       amount: 7,
       stepTime: 0.15,
-      textureSize: Vector2(horseSizeX,horseSizeY),
+      textureSize: Vector2(horseSizeX, horseSizeY),
       texturePosition: Vector2(0, 0),
     ),
-    HorseAnimationStates.Hit: SpriteAnimationData.sequenced(
+    HorseAnimationStates.hit: SpriteAnimationData.sequenced(
       amount: 1,
       stepTime: 0.1,
-      textureSize: Vector2(horseSizeX,horseSizeY),
-      texturePosition: Vector2(horseSizeX*7.0, 0),
+      textureSize: Vector2(horseSizeX, horseSizeY),
+      texturePosition: Vector2(horseSizeX * 7.0, 0),
     ),
   };
 
   double yMax = 0.0;
   double speedY = 0.0;
-  Timer _hitTimer = Timer(1);
-  static const double GRAVITY = 800;
+  final Timer _hitTimer = Timer(1);
+  static const double gravity = 800;
   final PlayerData playerData;
   bool isHit = false;
-  
+
   Horse(Image image, this.playerData)
       : super.fromFrameData(image, _animationMap);
 
   @override
   void onMount() {
-    this._reset();
+    _reset();
 
     final shape = HitboxRectangle(relation: Vector2(0.2, 0.3));
     addShape(shape);
-    yMax = this.y;
+    yMax = y;
 
     _hitTimer.callback = () {
-      this.current = HorseAnimationStates.Run;
-      this.isHit = false;
+      current = HorseAnimationStates.run;
+      isHit = false;
     };
 
     super.onMount();
@@ -66,18 +66,18 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
   @override
   void update(double dt) {
     // v = u + at
-    this.speedY += GRAVITY * dt;
+    speedY += gravity * dt;
 
     // d = s0 + s * t
-    this.y += this.speedY * dt;
+    y += speedY * dt;
 
     /// This code makes sure that Horse never goes beyond [yMax].
     if (isOnGround) {
-      this.y = this.yMax;
-      this.speedY = 0.0;
-      if ((this.current != HorseAnimationStates.Hit) &&
-          (this.current != HorseAnimationStates.Run)) {
-        this.current = HorseAnimationStates.Run;
+      y = yMax;
+      speedY = 0.0;
+      if ((current != HorseAnimationStates.hit) &&
+          (current != HorseAnimationStates.run)) {
+        current = HorseAnimationStates.run;
       }
     }
 
@@ -90,34 +90,34 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
     // Call hit only if other component is an Enemy and Horse
     // is not already in hit state.
     if ((other is Obstacle) && (!isHit)) {
-      this.hit();
+      hit();
     }
     super.onCollision(intersectionPoints, other);
   }
 
-  bool get isOnGround => (this.y >= this.yMax);
+  bool get isOnGround => (y >= yMax);
 
   void jump() {
     if (isOnGround) {
-      this.speedY = -470;
-      this.current = HorseAnimationStates.Jump;
+      speedY = -470;
+      current = HorseAnimationStates.jump;
     }
   }
 
   void hit() {
-    this.isHit = true;
-    this.current = HorseAnimationStates.Hit;
+    isHit = true;
+    current = HorseAnimationStates.hit;
     _hitTimer.start();
     playerData.lives -= 1;
   }
 
   void _reset() {
-    this.shouldRemove = false;
-    this.anchor = Anchor.bottomLeft;
-    this.position = Vector2(32, gameRef.size.y - 22);
-    this.size = Vector2.all(100);
-    this.current = HorseAnimationStates.Run;
-    this.isHit = false;
+    shouldRemove = false;
+    anchor = Anchor.bottomLeft;
+    position = Vector2(32, gameRef.size.y - 22);
+    size = Vector2.all(100);
+    current = HorseAnimationStates.run;
+    isHit = false;
     speedY = 0.0;
   }
 }

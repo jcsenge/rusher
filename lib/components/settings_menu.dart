@@ -1,11 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rusher/components/menu_wrapper.dart';
 import 'package:rusher/components/rusher.dart';
-
-import '/models/settings.dart';
 import 'main_menu.dart';
 
 class SettingsMenu extends StatelessWidget {
@@ -24,7 +20,8 @@ class SettingsMenu extends StatelessWidget {
             gameRef.overlays.remove(SettingsMenu.id);
             gameRef.overlays.add(MainMenu.id);
           },
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
             Icon(Icons.arrow_back_ios_rounded),
             Text(
               "Back",

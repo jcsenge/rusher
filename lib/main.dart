@@ -14,15 +14,14 @@ import 'components/settings_menu.dart';
 import 'models/player_data.dart';
 import 'models/settings.dart';
 
-
-Rusher _Rusher = Rusher();
+Rusher _rusher = Rusher();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Flame.device.fullScreen();
   Flame.device.setLandscape();
   await initHive();
-  runApp(RusherApp());
+  runApp(const RusherApp());
 }
 
 Future<void> initHive() async {
@@ -36,6 +35,8 @@ Future<void> initHive() async {
 }
 
 class RusherApp extends StatelessWidget {
+  const RusherApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,19 +49,18 @@ class RusherApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
-            fixedSize: Size(200, 60),
+            fixedSize: const Size(200, 60),
           ),
         ),
       ),
       home: Scaffold(
         body: GameWidget(
-          loadingBuilder: (conetxt) => Center(
-            child: Container(
+          loadingBuilder: (conetxt) => const Center(
+            child: SizedBox(
               width: 200,
               child: LinearProgressIndicator(),
             ),
           ),
-  
           overlayBuilderMap: {
             MainMenu.id: (_, Rusher gameRef) => MainMenu(gameRef),
             PauseMenu.id: (_, Rusher gameRef) => PauseMenu(gameRef),
@@ -68,9 +68,8 @@ class RusherApp extends StatelessWidget {
             GameOverMenu.id: (_, Rusher gameRef) => GameOverMenu(gameRef),
             SettingsMenu.id: (_, Rusher gameRef) => SettingsMenu(gameRef),
           },
-      
-          initialActiveOverlays: [MainMenu.id],
-          game: _Rusher,
+          initialActiveOverlays: const [MainMenu.id],
+          game: _rusher,
         ),
       ),
     );

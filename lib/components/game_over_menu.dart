@@ -41,7 +41,7 @@ class GameOverMenu extends StatelessWidget {
               },
             ),
             TextButton(
-              child: Text(
+              child: const Text(
                 'Restart',
                 style: TextStyle(
                   fontSize: 30,
@@ -56,7 +56,7 @@ class GameOverMenu extends StatelessWidget {
               },
             ),
             TextButton(
-              child: Text(
+              child: const Text(
                 'Exit',
                 style: TextStyle(
                   fontSize: 30,
