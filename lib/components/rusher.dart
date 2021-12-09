@@ -23,6 +23,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     'horse.png',
     'flower-open.png',
     'flower.png',
+    'shade.png'
   ];
 
   late Horse _horse;
@@ -42,6 +43,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
       [
         ParallaxImageData('scroll_bg_far.png'),
         ParallaxImageData('hills-scroll.png'),
+        ParallaxImageData('shade.png'),
       ],
       baseVelocity: Vector2(7, 0),
       velocityMultiplierDelta: Vector2(1.4, 0),

@@ -36,6 +36,7 @@ Future<void> initHive() async {
 
 class RusherApp extends StatelessWidget {
   const RusherApp({Key? key}) : super(key: key);
+  final RusherGame rusherGame = const RusherGame();
 
   @override
   Widget build(BuildContext context) {
@@ -53,24 +54,33 @@ class RusherApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Scaffold(
-        body: GameWidget(
-          loadingBuilder: (conetxt) => const Center(
-            child: SizedBox(
-              width: 200,
-              child: LinearProgressIndicator(),
-            ),
+      home: rusherGame,
+    );
+  }
+}
+
+class RusherGame extends StatelessWidget {
+  const RusherGame({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GameWidget(
+        loadingBuilder: (conetxt) => const Center(
+          child: SizedBox(
+            width: 200,
+            child: LinearProgressIndicator(),
           ),
-          overlayBuilderMap: {
-            MainMenu.id: (_, Rusher gameRef) => MainMenu(gameRef),
-            PauseMenu.id: (_, Rusher gameRef) => PauseMenu(gameRef),
-            InfoBar.id: (_, Rusher gameRef) => InfoBar(gameRef),
-            GameOverMenu.id: (_, Rusher gameRef) => GameOverMenu(gameRef),
-            SettingsMenu.id: (_, Rusher gameRef) => SettingsMenu(gameRef),
-          },
-          initialActiveOverlays: const [MainMenu.id],
-          game: _rusher,
         ),
+        overlayBuilderMap: {
+          MainMenu.id: (_, Rusher gameRef) => MainMenu(gameRef),
+          PauseMenu.id: (_, Rusher gameRef) => PauseMenu(gameRef),
+          InfoBar.id: (_, Rusher gameRef) => InfoBar(gameRef),
+          GameOverMenu.id: (_, Rusher gameRef) => GameOverMenu(gameRef),
+          SettingsMenu.id: (_, Rusher gameRef) => SettingsMenu(gameRef),
+        },
+        initialActiveOverlays: const [MainMenu.id],
+        game: _rusher,
       ),
     );
   }

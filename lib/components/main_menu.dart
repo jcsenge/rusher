@@ -17,6 +17,10 @@ class MainMenu extends StatelessWidget {
       asd: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(
+            "Rusher",
+            style: TextStyle(fontSize: 50, color: Colors.blue[900]),
+          ),
           TextButton(
             onPressed: () {
               gameRef.startGamePlay();
