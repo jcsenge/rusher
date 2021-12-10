@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "902494836548",
+    "project_id": "rusher-83408",
+    "storage_bucket": "rusher-83408.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902494836548:android:bb68259dddb4147a5fe911",
+        "android_client_info": {
+          "package_name": "hu.bme.aut.rusher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902494836548-g295hur905hdjspb98dtedr11s5s43ic.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hu.bme.aut.rusher",
+            "certificate_hash": "5edc1376f90eadf8c67064520c0e900c1770d45e"
+          }
+        },
+        {
+          "client_id": "902494836548-gmp7trqtutpf4inual3agmm945jbs8a2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhjqgRNIszkSAw807KT0vdTvrTT0I2CMY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902494836548-gmp7trqtutpf4inual3agmm945jbs8a2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
