@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class MenuWrapper extends StatelessWidget {
-  final Widget asd;
-  const MenuWrapper({Key? key, required this.asd}) : super(key: key);
+  final Widget menuItems;
+  const MenuWrapper({Key? key, required this.menuItems}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -16,11 +16,11 @@ class MenuWrapper extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Image.asset(
-                  'assets/images/cloud-0.png',
+                  'assets/images/grass_bg.png',
                   width: 800,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
-                asd,
+                menuItems,
               ],
             )),
       ),

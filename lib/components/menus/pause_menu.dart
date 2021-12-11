@@ -5,8 +5,8 @@ import '/models/player_data.dart';
 import '../gameplay/infobar.dart';
 import 'main_menu.dart';
 import '../gameplay/rusher.dart';
-class PauseMenu extends StatelessWidget {
 
+class PauseMenu extends StatelessWidget {
   static const id = 'PauseMenu';
   final Rusher gameRef;
 
@@ -17,7 +17,7 @@ class PauseMenu extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: gameRef.playerData,
       child: MenuWrapper(
-        asd: Column(
+        menuItems: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
@@ -27,12 +27,12 @@ class PauseMenu extends StatelessWidget {
                 builder: (_, score, __) {
                   return Text(
                     'Score: $score',
-                    style: const TextStyle(fontSize: 40, color: Colors.blue),
+                    style: const TextStyle(fontSize: 40, color: Colors.white),
                   );
                 },
               ),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 gameRef.overlays.remove(PauseMenu.id);
                 gameRef.overlays.add(InfoBar.id);
@@ -41,11 +41,11 @@ class PauseMenu extends StatelessWidget {
               child: const Text(
                 'Resume',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 17,
                 ),
               ),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 gameRef.overlays.remove(PauseMenu.id);
                 gameRef.overlays.add(InfoBar.id);
@@ -56,11 +56,11 @@ class PauseMenu extends StatelessWidget {
               child: const Text(
                 'Restart',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 17,
                 ),
               ),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 gameRef.overlays.remove(PauseMenu.id);
                 gameRef.overlays.add(MainMenu.id);
@@ -70,7 +70,7 @@ class PauseMenu extends StatelessWidget {
               child: const Text(
                 'Exit',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 17,
                 ),
               ),
             ),

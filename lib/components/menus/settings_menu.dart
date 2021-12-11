@@ -15,17 +15,20 @@ class SettingsMenu extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: gameRef.settings,
       child: MenuWrapper(
-        asd: TextButton(
+        menuItems: TextButton(
           onPressed: () {
             gameRef.overlays.remove(SettingsMenu.id);
             gameRef.overlays.add(MainMenu.id);
           },
           child:
               Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
-            Icon(Icons.arrow_back_ios_rounded),
+            Icon(
+              Icons.arrow_back_ios_rounded,
+              color: Colors.white,
+            ),
             Text(
               "Back",
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 30, color: Colors.white),
             ),
           ]),
         ),

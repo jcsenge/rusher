@@ -18,7 +18,7 @@ class GameOverMenu extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: gameRef.playerData,
       child: MenuWrapper(
-        asd: Column(
+        menuItems: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(

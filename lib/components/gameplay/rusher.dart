@@ -23,7 +23,8 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     'horse.png',
     'flower-open.png',
     'flower.png',
-    'shade.png'
+    'shade.png',
+    'grass_bg.png'
   ];
 
   late Horse _horse;

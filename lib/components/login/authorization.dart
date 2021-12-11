@@ -1,22 +1,22 @@
 import 'dart:async';
-import 'dart:developer';
-import 'dart:ffi';
-import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:google_sign_in/google_sign_in.dart';
 
 Future<bool> checkIfUserIsSignedIn(
     GoogleSignIn _googleSignIn, FirebaseAuth _auth) async {
+  var userSignedIn = false;
   if (!kIsWeb) {
-    var userSignedIn = await _googleSignIn.isSignedIn();
-    if (!userSignedIn) {
-      bool isSignedInWithEmail = _auth.currentUser != null;
-      userSignedIn = isSignedInWithEmail;
-    }
-    return userSignedIn;
+     userSignedIn = await _googleSignIn.isSignedIn();
   } else {
     return false;
   }
+  if (!userSignedIn) {
+    bool isSignedInWithEmail = _auth.currentUser != null;
+    userSignedIn = isSignedInWithEmail;
+  }
+  return userSignedIn;
 }
 
 FutureOr<UserCredential> signInWithGoogle(googleUser, googleAuth) async {
