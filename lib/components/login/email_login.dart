@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rusher/components/gameplay/rusher.dart';
 import 'package:rusher/components/login/login_page.dart';
 import 'package:rusher/components/login/register.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rusher/components/menus/main_menu.dart';
 
 import 'authorization.dart';
@@ -15,19 +16,16 @@ class EmailLogin extends StatefulWidget {
   const EmailLogin({required this.gameRef, Key? key}) : super(key: key);
 
   @override
-  _EmailLoginState createState() => _EmailLoginState(gameRef);
+  _EmailLoginState createState() => _EmailLoginState();
 }
 
 class _EmailLoginState extends State<EmailLogin> {
-  final Rusher gameRef;
   final _formKey = GlobalKey<FormState>();
   bool isUserSignedIn = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  _EmailLoginState(this.gameRef);
 
   void initApp() async {
     checkIfUserIsSignedIn(_googleSignIn, _auth);
@@ -54,11 +52,12 @@ class _EmailLoginState extends State<EmailLogin> {
                   height: 60,
                   child: TextFormField(
                     controller: _emailController,
-                    decoration:
-                        const InputDecoration(labelText: 'Enter your email'),
+                    decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.enterEmail),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter some text';
+                        return AppLocalizations.of(context)!
+                            .pleaseEnterSomeText;
                       }
                       return null;
                     },
@@ -72,10 +71,12 @@ class _EmailLoginState extends State<EmailLogin> {
                   child: TextFormField(
                     obscureText: true,
                     controller: _passwordController,
-                    decoration: const InputDecoration(labelText: 'Password'),
+                    decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.password),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter your password';
+                        return AppLocalizations.of(context)!
+                            .pleaseEnterSomeText;
                       }
                       return null;
                     },
@@ -87,19 +88,19 @@ class _EmailLoginState extends State<EmailLogin> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text(
-                        "No account? Register:",
-                        style: TextStyle(fontWeight: FontWeight.w700),
+                      Text(
+                        AppLocalizations.of(context)!.noAccount,
+                        style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            maximumSize: const Size(100, 50)),
+                            maximumSize: const Size(120, 50)),
                         onPressed: () {
-                          gameRef.overlays.remove(LoginPage.id);
-                          gameRef.overlays.add(Register.id);
+                          super.widget.gameRef.overlays.remove(LoginPage.id);
+                          super.widget.gameRef.overlays.add(Register.id);
                         },
-                        child: const Text(
-                          'Register',
+                        child: Text(
+                          AppLocalizations.of(context)!.register,
                           style: TextStyle(fontSize: 16, color: Colors.black87),
                         ),
                       ),
@@ -113,16 +114,24 @@ class _EmailLoginState extends State<EmailLogin> {
                                 .then((value) => {
                                       if (value != null)
                                         {
-                                          gameRef.overlays.remove(LoginPage.id),
-                                          gameRef.overlays.add(MainMenu.id)
+                                          super
+                                              .widget
+                                              .gameRef
+                                              .overlays
+                                              .remove(LoginPage.id),
+                                          super
+                                              .widget
+                                              .gameRef
+                                              .overlays
+                                              .add(MainMenu.id)
                                         }
                                       else
                                         {log("Error signing in")}
                                     });
                           }
                         },
-                        child: const Text(
-                          'Submit',
+                        child: Text(
+                          AppLocalizations.of(context)!.submit,
                           style: TextStyle(fontSize: 16, color: Colors.black87),
                         ),
                       ),

@@ -16,16 +16,17 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
     return Center(
       child: SizedBox(
         width: 300,
-        height: 200,
+        height: 100,
         child: FutureBuilder(
             future: getLeaders(),
             builder:
                 (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator());
                 } else {
                   return ListView.builder(
                       shrinkWrap: false,
@@ -35,7 +36,7 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: ListTile(
                             title: Text(
-                              "${index.toString()}. ${snapshot.data![index]["name"].toString()}: ${snapshot.data![index]["score"].toString()}",
+                              "${(index + 1).toString()}. ${snapshot.data![index]["name"].toString()}: ${snapshot.data![index]["score"].toString()}",
                               style: const TextStyle(
                                   fontWeight: FontWeight.w700,
                                   color: Colors.white60,
@@ -48,7 +49,8 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
               } else if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               }
-              return const CircularProgressIndicator();
+              return const SizedBox(
+                  width: 50, height: 50, child: CircularProgressIndicator());
             }),
       ),
     );

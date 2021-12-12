@@ -1,0 +1,25 @@
+{
+    "rusher": "Rusher",
+    "enterEmail": "Enter your email",
+    "pleaseEnterSomeText": "Please enter some text",
+    "password": "Password",
+    "pleaseEnterYourPassword": "Please enter your password",
+    "noMatch": "The passwords did not match.",
+    "cancel": "Cancel",
+    "passwordAgain": "Password again",
+    "noAccount": "No account? Register:",
+    "play": "Play",
+    "logout": "Logout",
+    "score": "Score:",
+    "resume": "Resume",
+    "register": "Register",
+    "restart": "Restart",
+    "exit": "Exit",
+    "gameOver": "Game Over :(",
+    "back": "Back",
+    "leaderBoard": "LeaderBoard",
+    "logInWith": "Log in with",
+    "submit": "Submit",
+    "high": "High"
+
+}

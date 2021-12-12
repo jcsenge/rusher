@@ -3,12 +3,13 @@ import 'package:rusher/components/firestore/leaderboard_list.dart';
 import 'package:rusher/components/menus/menu_wrapper.dart';
 import 'package:rusher/components/gameplay/rusher.dart';
 import 'main_menu.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SettingsMenu extends StatelessWidget {
-  static const id = 'SettingsMenu';
+class LeadersMenu extends StatelessWidget {
+  static const id = 'LeaderssMenu';
   final Rusher gameRef;
 
-  const SettingsMenu(this.gameRef, {Key? key}) : super(key: key);
+  const LeadersMenu(this.gameRef, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,9 @@ class SettingsMenu extends StatelessWidget {
       menuItems: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Leaderboard: ',
-            style: TextStyle(
+          Text(
+            '${AppLocalizations.of(context)!.leaderBoard}: ',
+            style: const TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.w900,
                 color: Colors.white60),
@@ -26,21 +27,19 @@ class SettingsMenu extends StatelessWidget {
           const LeaderBoardList(),
           TextButton(
             onPressed: () {
-              gameRef.overlays.remove(SettingsMenu.id);
+              gameRef.overlays.remove(LeadersMenu.id);
               gameRef.overlays.add(MainMenu.id);
             },
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.arrow_back_ios_rounded,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    "Back",
-                    style: TextStyle(fontSize: 30, color: Colors.white),
-                  ),
-                ]),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Icon(
+                Icons.arrow_back_ios_rounded,
+                color: Colors.white,
+              ),
+              Text(
+                AppLocalizations.of(context)!.back,
+                style: const TextStyle(fontSize: 30, color: Colors.white),
+              ),
+            ]),
           ),
         ],
       ),

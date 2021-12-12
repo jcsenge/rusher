@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rusher/components/menus/menu_wrapper.dart';
 import 'package:rusher/models/player_data.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../gameplay/infobar.dart';
 import 'main_menu.dart';
@@ -21,9 +22,9 @@ class GameOverMenu extends StatelessWidget {
         menuItems: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Game Over :(',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.gameOver,
+              style: const TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.w900,
                   color: Colors.white54),
@@ -32,7 +33,7 @@ class GameOverMenu extends StatelessWidget {
               selector: (_, playerData) => playerData.currentScore,
               builder: (_, score, __) {
                 return Text(
-                  'Score: $score',
+                  '${AppLocalizations.of(context)!.score} $score',
                   style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w900,
@@ -41,9 +42,9 @@ class GameOverMenu extends StatelessWidget {
               },
             ),
             ElevatedButton(
-              child: const Text(
-                'Restart',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.restart,
+                style: const TextStyle(
                   fontSize: 18,
                 ),
               ),
@@ -58,9 +59,9 @@ class GameOverMenu extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: ElevatedButton(
-                child: const Text(
-                  'Exit',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.exit,
+                  style: const TextStyle(
                     fontSize: 18,
                   ),
                 ),

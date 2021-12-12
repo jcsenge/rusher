@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rusher/components/gameplay/rusher.dart';
 import 'package:rusher/components/menus/menu_wrapper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'authorization.dart';
 import 'login_page.dart';
@@ -77,11 +78,14 @@ class RegisterState extends State<Register> {
                                         vertical: 5.0),
                                     child: TextFormField(
                                       controller: _emailController,
-                                      decoration: const InputDecoration(
-                                          labelText: 'Enter your email'),
+                                      decoration: InputDecoration(
+                                          labelText:
+                                              AppLocalizations.of(context)!
+                                                  .enterEmail),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Please enter some text';
+                                          return AppLocalizations.of(context)!
+                                              .pleaseEnterSomeText;
                                         }
                                         return null;
                                       },
@@ -96,15 +100,19 @@ class RegisterState extends State<Register> {
                                     child: TextFormField(
                                       obscureText: true,
                                       controller: _passwordController,
-                                      decoration: const InputDecoration(
-                                          labelText: 'Password'),
+                                      decoration: InputDecoration(
+                                          labelText:
+                                              AppLocalizations.of(context)!
+                                                  .password),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Please enter your password';
+                                          return AppLocalizations.of(context)!
+                                              .pleaseEnterYourPassword;
                                         }
                                         if (value !=
                                             _passwordConfirmController.text) {
-                                          return 'The passwords did not match.';
+                                          return AppLocalizations.of(context)!
+                                              .noMatch;
                                         }
                                         return null;
                                       },
@@ -119,14 +127,18 @@ class RegisterState extends State<Register> {
                                     child: TextFormField(
                                       obscureText: true,
                                       controller: _passwordConfirmController,
-                                      decoration: const InputDecoration(
-                                          labelText: 'Password again'),
+                                      decoration: InputDecoration(
+                                          labelText:
+                                              AppLocalizations.of(context)!
+                                                  .passwordAgain),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Please enter your password';
+                                          return AppLocalizations.of(context)!
+                                              .pleaseEnterYourPassword;
                                         }
                                         if (value != _passwordController.text) {
-                                          return 'The passwords did not match.';
+                                          return AppLocalizations.of(context)!
+                                              .noMatch;
                                         }
                                         return null;
                                       },
@@ -156,9 +168,9 @@ class RegisterState extends State<Register> {
                                               .overlays
                                               .add(LoginPage.id);
                                         },
-                                        child: const Text(
-                                          'Cancel',
-                                          style: TextStyle(
+                                        child: Text(
+                                          AppLocalizations.of(context)!.cancel,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               color: Colors.black87),
                                         ),
@@ -176,9 +188,10 @@ class RegisterState extends State<Register> {
                                             _register();
                                           }
                                         },
-                                        child: const Text(
-                                          'Register',
-                                          style: TextStyle(
+                                        child: Text(
+                                          AppLocalizations.of(context)!
+                                              .register,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               color: Colors.black87),
                                         ),

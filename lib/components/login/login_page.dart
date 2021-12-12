@@ -7,6 +7,7 @@ import 'package:rusher/components/gameplay/rusher.dart';
 import 'package:rusher/components/login/email_login.dart';
 import 'package:rusher/components/menus/main_menu.dart';
 import 'package:rusher/components/menus/menu_wrapper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'authorization.dart';
 
@@ -28,7 +29,7 @@ class LoginPage extends StatelessWidget {
         menuItems: Center(
           child: SizedBox(
             height: 400,
-            width: 400,
+            width: 500,
             child: ListView(
               shrinkWrap: true,
               children: [
@@ -46,8 +47,8 @@ class LoginPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              "Log in with:",
+                            Text(
+                              '${AppLocalizations.of(context)!.logInWith}: ',
                               style: TextStyle(fontWeight: FontWeight.w700),
                             ),
                             IconButton(

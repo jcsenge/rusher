@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class UserWithScore {
   final String name;
@@ -11,12 +8,15 @@ class UserWithScore {
 
 Future<void> saveNewLeader(UserWithScore leader) async {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  final CollectionReference leaders = _firestore
+  final leaders = await loadLeaderBoardList();
+  if (leaders.length >= 10) {
+    leaders.remove(leaders.last);
+  }
+  leaders.add({"name": leader.name, "score": leader.score});
+  await _firestore
       .collection('leaderBoardData')
       .doc('Omm5rjS6Jtxu8NxWMnZu')
-      .collection('leaders');
-  leaders.doc('leaders');
+      .set({"leaders": leaders});
 }
 
 Future<List<dynamic>> loadLeaderBoardList() async {

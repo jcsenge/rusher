@@ -3,7 +3,6 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rusher/components/login/login_page.dart';
@@ -14,8 +13,10 @@ import 'components/gameplay/rusher.dart';
 import 'components/menus/game_over_menu.dart';
 import 'components/menus/main_menu.dart';
 import 'components/menus/pause_menu.dart';
-import 'components/menus/settings_menu.dart';
+import 'components/menus/leaders_menu.dart';
 import 'models/player_data.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 Rusher _rusher = Rusher();
 
@@ -26,9 +27,7 @@ Future<void> main() async {
   await initHive();
   //await dotenv.load();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      
-    ),
+    options: const FirebaseOptions(),
   );
   runApp(const RusherApp());
 }
@@ -49,8 +48,18 @@ class RusherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('hu', ''),
+      ],
       debugShowCheckedModeBanner: false,
-      title: 'Rusher',
+      title: "Rusher",
       theme: ThemeData(
         errorColor: Colors.redAccent,
         inputDecorationTheme:
@@ -88,7 +97,7 @@ class RusherGame extends StatelessWidget {
           PauseMenu.id: (_, Rusher gameRef) => PauseMenu(gameRef),
           InfoBar.id: (_, Rusher gameRef) => InfoBar(gameRef),
           GameOverMenu.id: (_, Rusher gameRef) => GameOverMenu(gameRef),
-          SettingsMenu.id: (_, Rusher gameRef) => SettingsMenu(gameRef),
+          LeadersMenu.id: (_, Rusher gameRef) => LeadersMenu(gameRef),
           Register.id: (_, Rusher gameRef) => Register(gameRef),
         },
         initialActiveOverlays: const [LoginPage.id],

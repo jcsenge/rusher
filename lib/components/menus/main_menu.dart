@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:rusher/components/login/login_page.dart';
 import 'package:rusher/components/menus/menu_wrapper.dart';
 import 'package:rusher/components/gameplay/rusher.dart';
-import 'package:rusher/components/menus/settings_menu.dart';
+import 'package:rusher/components/menus/leaders_menu.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../gameplay/infobar.dart';
 
@@ -21,7 +22,7 @@ class MainMenu extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Rusher",
+            AppLocalizations.of(context)?.rusher ?? "Rusher",
             style: TextStyle(
                 fontSize: 50,
                 fontWeight: FontWeight.w800,
@@ -36,9 +37,9 @@ class MainMenu extends StatelessWidget {
                 gameRef.overlays.remove(MainMenu.id);
                 gameRef.overlays.add(InfoBar.id);
               },
-              child: const Text(
-                'Play',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.play,
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),
@@ -50,11 +51,11 @@ class MainMenu extends StatelessWidget {
               style: ElevatedButton.styleFrom(minimumSize: const Size(80, 50)),
               onPressed: () {
                 gameRef.overlays.remove(MainMenu.id);
-                gameRef.overlays.add(SettingsMenu.id);
+                gameRef.overlays.add(LeadersMenu.id);
               },
-              child: const Text(
-                'Settings',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.leaderBoard,
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),
@@ -70,9 +71,9 @@ class MainMenu extends StatelessWidget {
                       gameRef.overlays.add(LoginPage.id),
                     });
               },
-              child: const Text(
-                'Logout',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.logout,
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),

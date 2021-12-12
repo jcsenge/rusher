@@ -16,10 +16,6 @@ class Ground extends SpriteAnimationComponent with HasGameRef<Rusher> {
     );
   }
 
-  @override
-  void onMount() {
-    super.onMount();
-  }
 
   @override
   void update(double dt) {

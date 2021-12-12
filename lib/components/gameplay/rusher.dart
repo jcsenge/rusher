@@ -1,19 +1,18 @@
+import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
 import 'package:flame/gestures.dart';
 import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
-import 'package:flame/components.dart';
+import 'package:hive/hive.dart';
+import 'package:rusher/components/firestore/firestore.dart';
 import 'package:rusher/components/gameplay/ground_manager.dart';
 import 'package:rusher/components/gameplay/horse.dart';
 
 import '/models/player_data.dart';
 import '../menus/game_over_menu.dart';
-import 'ground.dart';
+import '../menus/pause_menu.dart';
 import 'infobar.dart';
 import 'obstacle_manager.dart';
-import '../menus/pause_menu.dart';
 
 class Rusher extends BaseGame with TapDetector, HasCollidables {
   static const _imageAssets = [
@@ -82,11 +81,18 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
   }
 
   @override
-  void update(double dt) {
+  Future<void> update(double dt) async {
     if (playerData.lives <= 0) {
       overlays.add(GameOverMenu.id);
       overlays.remove(InfoBar.id);
       pauseEngine();
+      final leaderList = await loadLeaderBoardList();
+      if (leaderList.last['score'] > playerData.currentScore ||
+          leaderList.length < 10) {
+        saveNewLeader(UserWithScore(
+            "LeaderPlayer" + playerData.currentScore.toString(),
+            playerData.currentScore));
+      }
     }
     super.update(dt);
   }

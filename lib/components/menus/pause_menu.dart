@@ -5,6 +5,7 @@ import '/models/player_data.dart';
 import '../gameplay/infobar.dart';
 import 'main_menu.dart';
 import '../gameplay/rusher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PauseMenu extends StatelessWidget {
   static const id = 'PauseMenu';
@@ -26,7 +27,7 @@ class PauseMenu extends StatelessWidget {
                 selector: (_, playerData) => playerData.currentScore,
                 builder: (_, score, __) {
                   return Text(
-                    'Score: $score',
+                    '${AppLocalizations.of(context)!.score} $score',
                     style: const TextStyle(fontSize: 40, color: Colors.white),
                   );
                 },
@@ -40,9 +41,9 @@ class PauseMenu extends StatelessWidget {
                   gameRef.overlays.add(InfoBar.id);
                   gameRef.resumeEngine();
                 },
-                child: const Text(
-                  'Resume',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.resume,
+                  style: const TextStyle(
                     fontSize: 17,
                   ),
                 ),
@@ -58,9 +59,9 @@ class PauseMenu extends StatelessWidget {
                   gameRef.reset();
                   gameRef.startGamePlay();
                 },
-                child: const Text(
-                  'Restart',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.restart,
+                  style: const TextStyle(
                     fontSize: 17,
                   ),
                 ),
@@ -75,9 +76,9 @@ class PauseMenu extends StatelessWidget {
                   gameRef.resumeEngine();
                   gameRef.reset();
                 },
-                child: const Text(
-                  'Exit',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.exit,
+                  style: const TextStyle(
                     fontSize: 17,
                   ),
                 ),

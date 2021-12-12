@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rusher/components/gameplay/rusher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '/models/player_data.dart';
 import '../menus/pause_menu.dart';
@@ -28,7 +29,7 @@ class InfoBar extends StatelessWidget {
                   selector: (_, playerData) => playerData.currentScore,
                   builder: (_, score, __) {
                     return Text(
-                      'Score: $score',
+                      '${AppLocalizations.of(context)!.score} $score',
                       style: const TextStyle(fontSize: 30, color: Colors.white),
                     );
                   },
@@ -37,7 +38,7 @@ class InfoBar extends StatelessWidget {
                   selector: (_, playerData) => playerData.highScore,
                   builder: (_, highScore, __) {
                     return Text(
-                      'High: $highScore',
+                      '${AppLocalizations.of(context)!.high}: $highScore',
                       style: const TextStyle(color: Colors.white),
                     );
                   },
