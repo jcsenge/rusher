@@ -65,13 +65,8 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
 
   @override
   void update(double dt) {
-    // v = u + at
     speedY += gravity * dt;
-
-    // d = s0 + s * t
     y += speedY * dt;
-
-    /// This code makes sure that Horse never goes beyond [yMax].
     if (isOnGround) {
       y = yMax;
       speedY = 0.0;
@@ -114,7 +109,7 @@ class Horse extends SpriteAnimationGroupComponent<HorseAnimationStates>
   void _reset() {
     shouldRemove = false;
     anchor = Anchor.bottomLeft;
-    position = Vector2(32, gameRef.size.y - 22);
+    position = Vector2(32, gameRef.size.y - 85);
     size = Vector2.all(100);
     current = HorseAnimationStates.run;
     isHit = false;

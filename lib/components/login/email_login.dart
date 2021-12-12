@@ -70,6 +70,7 @@ class _EmailLoginState extends State<EmailLogin> {
                 child: SizedBox(
                   height: 60,
                   child: TextFormField(
+                    obscureText: true,
                     controller: _passwordController,
                     decoration: const InputDecoration(labelText: 'Password'),
                     validator: (value) {

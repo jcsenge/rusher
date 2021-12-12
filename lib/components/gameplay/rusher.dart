@@ -1,14 +1,16 @@
 import 'package:flame/game.dart';
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:flame/gestures.dart';
 import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
+import 'package:rusher/components/gameplay/ground_manager.dart';
 import 'package:rusher/components/gameplay/horse.dart';
 
-import '/models/settings.dart';
 import '/models/player_data.dart';
 import '../menus/game_over_menu.dart';
+import 'ground.dart';
 import 'infobar.dart';
 import 'obstacle_manager.dart';
 import '../menus/pause_menu.dart';
@@ -24,18 +26,20 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     'flower-open.png',
     'flower.png',
     'shade.png',
-    'grass_bg.png'
+    'cloud-0.png',
+    'grass_bg.png',
+    'tile_grass.png',
+    'tile_grass_prallax.png'
   ];
 
   late Horse _horse;
-  late Settings settings;
   late PlayerData playerData;
+  late GroundManager _groundManager;
   late ObstacleManager _obstacleManager;
 
   @override
   Future<void> onLoad() async {
     playerData = await _readPlayerData();
-    settings = await _readSettings();
     await images.loadAll(_imageAssets);
     viewport = FixedResolutionViewport(
         Vector2(viewport.effectiveSize.x, viewport.effectiveSize.y));
@@ -45,6 +49,7 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
         ParallaxImageData('scroll_bg_far.png'),
         ParallaxImageData('hills-scroll.png'),
         ParallaxImageData('shade.png'),
+        ParallaxImageData('tile_grass_prallax.png'),
       ],
       baseVelocity: Vector2(7, 0),
       velocityMultiplierDelta: Vector2(1.4, 0),
@@ -52,16 +57,20 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
     add(parallaxBackground);
     _obstacleManager = ObstacleManager();
     _horse = Horse(images.fromCache('horse.png'), playerData);
+    _groundManager = GroundManager();
     return super.onLoad();
   }
 
   void startGamePlay() {
     add(_horse);
+    add(_groundManager);
     add(_obstacleManager);
   }
 
   void _disconnectActors() {
     _horse.remove();
+    _groundManager.removeAllGroundElements();
+    _groundManager.remove();
     _obstacleManager.removeAllEnemies();
     _obstacleManager.remove();
   }
@@ -98,18 +107,6 @@ class Rusher extends BaseGame with TapDetector, HasCollidables {
       await playerDataBox.put('Rusher.PlayerData', PlayerData());
     }
     return playerDataBox.get('Rusher.PlayerData')!;
-  }
-
-  Future<Settings> _readSettings() async {
-    final settingsBox = await Hive.openBox<Settings>('Rusher.SettingsBox');
-    final settings = settingsBox.get('Rusher.Settings');
-    if (settings == null) {
-      await settingsBox.put(
-        'Rusher.Settings',
-        Settings(bgm: true, sfx: true),
-      );
-    }
-    return settingsBox.get('Rusher.Settings')!;
   }
 
   @override

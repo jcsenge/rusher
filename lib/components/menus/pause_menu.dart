@@ -32,45 +32,54 @@ class PauseMenu extends StatelessWidget {
                 },
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                gameRef.overlays.remove(PauseMenu.id);
-                gameRef.overlays.add(InfoBar.id);
-                gameRef.resumeEngine();
-              },
-              child: const Text(
-                'Resume',
-                style: TextStyle(
-                  fontSize: 17,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  gameRef.overlays.remove(PauseMenu.id);
+                  gameRef.overlays.add(InfoBar.id);
+                  gameRef.resumeEngine();
+                },
+                child: const Text(
+                  'Resume',
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                gameRef.overlays.remove(PauseMenu.id);
-                gameRef.overlays.add(InfoBar.id);
-                gameRef.resumeEngine();
-                gameRef.reset();
-                gameRef.startGamePlay();
-              },
-              child: const Text(
-                'Restart',
-                style: TextStyle(
-                  fontSize: 17,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  gameRef.overlays.remove(PauseMenu.id);
+                  gameRef.overlays.add(InfoBar.id);
+                  gameRef.resumeEngine();
+                  gameRef.reset();
+                  gameRef.startGamePlay();
+                },
+                child: const Text(
+                  'Restart',
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                gameRef.overlays.remove(PauseMenu.id);
-                gameRef.overlays.add(MainMenu.id);
-                gameRef.resumeEngine();
-                gameRef.reset();
-              },
-              child: const Text(
-                'Exit',
-                style: TextStyle(
-                  fontSize: 17,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  gameRef.overlays.remove(PauseMenu.id);
+                  gameRef.overlays.add(MainMenu.id);
+                  gameRef.resumeEngine();
+                  gameRef.reset();
+                },
+                child: const Text(
+                  'Exit',
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
                 ),
               ),
             ),

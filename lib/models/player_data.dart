@@ -3,7 +3,6 @@ import 'package:hive/hive.dart';
 
 part 'player_data.g.dart';
 
-// This class stores the player progress presistently.
 @HiveType(typeId: 0)
 class PlayerData extends ChangeNotifier with HiveObjectMixin {
   @HiveField(1)
@@ -13,7 +12,7 @@ class PlayerData extends ChangeNotifier with HiveObjectMixin {
 
   int get lives => _lives;
   set lives(int value) {
-    if (value <= 5 && value >= 0) {
+    if (value <= 3 && value >= 0) {
       _lives = value;
       notifyListeners();
     }

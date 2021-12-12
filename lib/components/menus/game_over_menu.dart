@@ -21,30 +21,30 @@ class GameOverMenu extends StatelessWidget {
         menuItems: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Game Over :(',
               style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.w900,
-                  color: Colors.blue[900]),
+                  color: Colors.white54),
             ),
             Selector<PlayerData, int>(
               selector: (_, playerData) => playerData.currentScore,
               builder: (_, score, __) {
                 return Text(
                   'Score: $score',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w900,
-                      color: Colors.blue[900]),
+                      color: Colors.white),
                 );
               },
             ),
-            TextButton(
+            ElevatedButton(
               child: const Text(
                 'Restart',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 18,
                 ),
               ),
               onPressed: () {
@@ -55,19 +55,22 @@ class GameOverMenu extends StatelessWidget {
                 gameRef.startGamePlay();
               },
             ),
-            TextButton(
-              child: const Text(
-                'Exit',
-                style: TextStyle(
-                  fontSize: 30,
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: ElevatedButton(
+                child: const Text(
+                  'Exit',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
+                onPressed: () {
+                  gameRef.overlays.remove(GameOverMenu.id);
+                  gameRef.overlays.add(MainMenu.id);
+                  gameRef.resumeEngine();
+                  gameRef.reset();
+                },
               ),
-              onPressed: () {
-                gameRef.overlays.remove(GameOverMenu.id);
-                gameRef.overlays.add(MainMenu.id);
-                gameRef.resumeEngine();
-                gameRef.reset();
-              },
             ),
           ],
         ),
